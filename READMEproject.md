@@ -1,12 +1,15 @@
 # Smart Hospitals (Hospital Management System)
-This is a hospital managemnt system written in php(Laravel)
+This is a hospital management system written in php(Laravel)
 
 ## This has the following features
-* Patient Management
-    * Patinet Registration (IN/OUT)
-    * Search Patient
-    * Edit Pateint Details
-    * Book Appointments
+* Appointments Managment
+    * Book,view and delete appointments
+* Patients Managment
+    * Manage patients information,medical history.
+* Doctor Managment
+    * Manage doctors profiles and their schedules  
+* User Roles and Permissions: Define roles and permissions for different types of users such as admin,doctor and patient.
+    
 
 * User Role Based Access Control
     * Admin
