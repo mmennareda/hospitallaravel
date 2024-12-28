@@ -1,0 +1,95 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Model\Doctor;
+use App\Model\Patientbooking;
+use Illuminate\Http\Request;
+
+class PatientbookingController extends Controller
+{
+
+    
+
+    public function searchbook(Request $request)
+    {
+        $search = $request->get('search');
+        $users = Patientbooking::when($search, function ($sql) use ($search) {
+            $sql->where('patientemail', 'like', '%' . $search . '%');
+        })
+            ->paginate(4);
+
+        return view('bookingsearch',  [
+            "data" => $users,
+        ]);
+    }
+
+    public function delete($id)
+    {
+        $booking = Patientbooking::findOrFail($id);
+        $booking->delete();
+        return redirect()->route('home')->with("message", "deleted successfully");
+    }
+
+    public function edit($id)
+    {
+        $booking = Patientbooking::findOrFail($id);
+        return view("patientbooking/edit", ["result" => $booking]);
+    }
+
+    public function saveedit(Request $request)
+    {
+        $old_id = $request->old_id;
+        $booking = Patientbooking::findOrFail($old_id);
+
+        $request->validate([
+            'patientname' => 'required',
+            'patientage' => 'required',
+            'patientphone' => 'required',
+        ]);
+
+        $booking->update([
+            "days" => $request->days,
+            "time" => $request->time,
+            "patientname" => $request->patientname,
+            "patientemail" => $request->patientemail,
+            "patientphone" => $request->patientphone,
+            "patientage" => $request->patientage,
+        ]);
+        return redirect()->route('home')->with("message", "Updated Successfully");
+    }
+
+    public function book($id)
+    {
+        $patibook = Patientbooking::count();
+        if ($patibook > 4) {
+            return redirect()->route('doctorlist')->with("message", "No Booking Available");
+        } else {
+            $Doctor = Doctor::findOrFail($id);
+            return view('patientbooking/create', ["result" => $Doctor]);
+        }
+    }
+
+    public function savebook(Request $item)
+    {
+        $item->validate([
+            'patientname' => 'required',
+            'patientage' => 'required',
+            'patientphone' => 'required',
+        ]);
+
+        Patientbooking::create([
+            "doctor" => $item->doctor,
+            "doctoremail" => $item->doctoremail,
+            "department" => $item->department,
+            "days" => $item->days,
+            "time" => $item->time,
+            "patientname" => $item->patientname,
+            "patientemail" => $item->patientemail,
+            "patientphone" => $item->patientphone,
+            "patientage" => $item->patientage,
+            "consultancyfees" => $item->consultancyfees,
+        ]);
+        return redirect()->route('home')->with("message", "Booked Successfully");
+    }
+}
