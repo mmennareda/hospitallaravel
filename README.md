@@ -16,7 +16,18 @@ This is a hospital management system written in php(Laravel)
     * Doctor
     * Patient
 
- 
+* Login Details for Admin :
+email : admin@gmail.com
+Password : 12345678
+
+* Login Details for Doctor :
+email : doctor@gmail.com
+Password : 12345678
+
+* Login Details for Patient :
+email : patient@gmail.com
+Password : 12345678
+
 # Installation Guide
     1)Install Composer In Your PC
     
@@ -49,34 +60,3 @@ Every Time You Make A Change To The Database Do The Change In The Migrations(Not
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
