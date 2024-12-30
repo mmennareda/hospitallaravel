@@ -3,7 +3,7 @@ This is a hospital management system written in php(Laravel)
 
 ## This has the following features
 * Appointments Managment
-    * Book,view and delete appointments
+    * Book ,view and delete appointments
 * Patients Managment
     * Manage patients information,medical history.
 * Doctor Managment
